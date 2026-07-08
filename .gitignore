@@ -1,0 +1,4 @@
+*.gif
+venv/
+*.vbs
+*.wsh
