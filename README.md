@@ -1,5 +1,7 @@
 # Water Reminder Desktop App
 
+![Water Reminder Demo](example.gif)
+
 Water Reminder adalah aplikasi desktop sederhana berbasis **Python + PyQt5** untuk mengingatkan pengguna agar minum air secara berkala. Aplikasi berjalan di background, muncul di pojok kanan bawah layar, menampilkan karakter GIF, lalu memberi pilihan **Sudah minum** atau **Snooze**.
 
 ## Fitur

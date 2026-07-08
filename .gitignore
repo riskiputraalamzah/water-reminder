@@ -1,4 +1,6 @@
 *.gif
+# Keep demo GIF for README
+!example.gif
 venv/
 *.vbs
 *.wsh
