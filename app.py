@@ -490,11 +490,22 @@ class WaterReminderApp:
         self.next_timer.timeout.connect(self.window.play_reminder)
 
         self.setup_tray()
+        self.show_startup_info()
 
         if SHOW_ON_START:
             self.window.play_reminder()
         else:
             self.schedule_next_reminder(NORMAL_INTERVAL_MS)
+
+    def show_startup_info(self):
+        now = datetime.now()
+
+        print("\n" + "=" * 60)
+        print("🚀 WATER DRINKING REMINDER STARTED")
+        print(f"📅 Date        : {now.strftime('%d %B %Y')}")
+        print(f"🕒 Start Time  : {now.strftime('%H:%M:%S')}")
+        print(f"💻 Status      : Application is running...")
+        print("=" * 60 + "\n")
 
     def schedule_next_reminder(self, delay_ms):
         self.next_timer.stop()
