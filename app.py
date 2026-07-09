@@ -19,6 +19,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QTimer, QSize
 from PyQt5.QtGui import QMovie
 
+from datetime import datetime, timedelta
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -80,7 +82,8 @@ def get_gif_info(gif_path):
 
     for frame in ImageSequence.Iterator(gif):
         frame_count += 1
-        total_duration += frame.info.get("duration", gif.info.get("duration", 100))
+        total_duration += frame.info.get("duration",
+                                         gif.info.get("duration", 100))
 
     width, height = gif.size
 
@@ -325,7 +328,8 @@ class WaterReminderWindow(QWidget):
 
     def on_frame_changed(self, frame_number):
         if DEBUG_FRAMES:
-            print(f"Frame: {frame_number} / {self.end_frame} | State: {self.state}")
+            print(
+                f"Frame: {frame_number} / {self.end_frame} | State: {self.state}")
 
         if self.state == "walking_in":
             if frame_number >= HOLD_FRAME:
@@ -496,7 +500,17 @@ class WaterReminderApp:
         self.next_timer.stop()
         self.next_timer.start(delay_ms)
 
-        print(f"Reminder berikutnya dalam {delay_ms / 1000:.0f} detik.")
+        total_seconds = delay_ms // 1000
+        minutes = total_seconds // 60
+        seconds = total_seconds % 60
+
+        next_time = datetime.now() + timedelta(milliseconds=delay_ms)
+
+        print("=" * 50)
+        print("💧 WATER DRINKING REMINDER")
+        print(f"⏳ Countdown : {minutes:02d}:{seconds:02d}")
+        print(f"🕒 Reminder  : {next_time.strftime('%H:%M:%S')}")
+        print("=" * 50)
 
     def show_now(self):
         self.next_timer.stop()
